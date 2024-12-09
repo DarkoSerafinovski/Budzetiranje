@@ -1,0 +1,101 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f6f9;
+    margin: 0;
+    padding: 0;
+    color: #333;
+  }
+  
+  .create-group-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+  }
+  
+  /* Forma */
+  .create-group-form .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .create-group-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #34495e;
+  }
+  
+  .create-group-form input,
+  .create-group-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    color: #333;
+    box-sizing: border-box;
+  }
+  
+  .create-group-form textarea {
+    resize: none;
+    height: 100px;
+  }
+  
+  .create-group-form input:focus,
+  .create-group-form textarea:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+  }
+  
+  /* Dugme */
+  .submit-button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #2ecc71;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .submit-button:hover {
+    background-color: #27ae60;
+    transform: translateY(-3px);
+  }
+/* Stilovi za višestruko biranje */
+.create-group-form select {
+    width: 100%;
+    height: 120px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    color: #333;
+  }
+  
+  .create-group-form select:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+  }
+  
+  small {
+    display: block;
+    margin-top: 5px;
+    color: #7f8c8d;
+    font-size: 14px;
+  }
+    

@@ -1,0 +1,32 @@
+.groups-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 50px;
+  }
+  
+  .group-card {
+    background-color: #f0f0f0; /* Svetla boja za karticu */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    width: 250px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .group-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .group-name {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+  }
+  
+  .group-participants,
+  .group-expenses {
+    margin: 5px 0;
+  }
+  

@@ -1,0 +1,47 @@
+/* Kontejner navigacije */
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0px;
+    background-color: #3d3d3d;
+    color: #fff;
+    position: relative;
+    width: 100%;
+  }
+  
+  /* Navigacioni linkovi */
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+  }
+  
+  .nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.4rem;
+    transition: color 0.3s;
+  }
+  
+  .nav-links a:hover {
+    color: #ffcc00;
+  }
+  
+  /* Logout dugme */
+  .logout-button {
+    background-color: #ff4d4d;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    margin-right: 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .logout-button:hover {
+    background-color: #e60000;
+  }
+  

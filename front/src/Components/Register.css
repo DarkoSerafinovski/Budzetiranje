@@ -1,0 +1,76 @@
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #548ef8, #0d70fa);
+  }
+  
+  .register-box {
+    background: #ffffff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 2rem 5rem;
+    margin: 50px auto;
+    width: 350px;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .register-title {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .register-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .form-input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 0.5rem;
+  }
+  
+  .register-button {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .register-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .login-footer {
+    text-align: center;
+    margin-top: 1rem;
+  }
+  
+  .login-footer a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .login-footer a:hover {
+    text-decoration: underline;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  

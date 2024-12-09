@@ -1,0 +1,82 @@
+
+/* VipPersonalExpenses.css */
+.vip-personal-expenses {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  max-width: 800px;
+  margin: 20px auto;
+  background-color: #f9f9fc;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.page-title {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.expenses-list {
+  margin-bottom: 30px;
+}
+
+.expense-item {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 20px;
+  background: #ffffff;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.expense-item:hover {
+  transform: translateY(-2px);
+}
+
+.expense-description {
+  font-weight: bold;
+  color: #4a4a4a;
+}
+
+.expense-amount {
+  color: #1e88e5;
+  font-weight: bold;
+}
+
+.add-expense-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+.add-expense-form input {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  flex: 1 1 300px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.add-expense-form input:focus {
+  border-color: #1e88e5;
+  outline: none;
+}
+
+.add-expense-button {
+  padding: 12px 20px;
+  background-color: #1e88e5;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.add-expense-button:hover {
+  background-color: #1565c0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
