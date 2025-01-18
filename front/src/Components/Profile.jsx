@@ -78,11 +78,11 @@ const Profile = () => {
             </div>
             <div className="profile-stat">
               <h3>Ukupna Dugovanja</h3>
-              <p>${totalDebt}</p>
+              <p>{totalDebt} RSD</p>
             </div>
             <div className="profile-stat">
               <h3>Ukupna Potraživanja</h3>
-              <p>${totalClaims}</p>
+              <p>{totalClaims} RSD</p>
             </div>
           </div>
         </div>

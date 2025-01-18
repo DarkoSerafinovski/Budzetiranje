@@ -18,6 +18,8 @@ const GroupExpenses = () => {
   const [filterPurpose, setFilterPurpose] = useState(''); // Filter za svrhu
   const [filterAmount, setFilterAmount] = useState(0); // Filter za minimalnu cenu
   const [filterStatus, setFilterStatus] = useState('all'); // Filter za status (sve, plaćeno, neplaćeno)
+  const [currency, setCurrency] = useState('RSD'); // Default currency is RSD
+  const [exchangeRates, setExchangeRates] = useState({}); // Exchange rates for conversion
   const authToken = sessionStorage.getItem('auth_token'); // Uzima authorization token sa sessionStorage
 
   // Funkcija za preuzimanje grupnih troškova
@@ -40,8 +42,25 @@ const GroupExpenses = () => {
     }
   };
 
+  // Funkcija za preuzimanje kursnih stopa
+  const fetchExchangeRates = async () => {
+    try {
+      const response = await axios.get('https://api.exchangerate-api.com/v4/latest/RSD'); // Example API endpoint
+      setExchangeRates(response.data.rates); // Storing exchange rates
+    } catch (error) {
+      console.error('Greška prilikom dobijanja kursnih stopa:', error);
+    }
+  };
+
+  // Funkcija za konvertovanje iznosa u odabranu valutu
+  const convertCurrency = (amount) => {
+    if (currency === 'RSD') return amount;
+    return (amount * (exchangeRates[currency] || 1)).toFixed(2); // Return converted amount
+  };
+
   useEffect(() => {
     fetchGroupExpenses(); // Pozivanje funkcije za preuzimanje podataka kada se komponenta učita
+    fetchExchangeRates(); // Fetch exchange rates on component mount
   }, [id, authToken]);
 
   useEffect(() => {
@@ -61,7 +80,6 @@ const GroupExpenses = () => {
     });
     setFilteredExpenses(filtered);
   }, [filterPurpose, filterAmount, filterStatus, filterType, expenses, currentUser]);
-  
 
   // Funkcija za označavanje duga kao plaćenog
   const markAsPaid = async (debtClaimId) => {
@@ -92,7 +110,7 @@ const GroupExpenses = () => {
         return (
           <div key={debt.debtor.id} className={`debt-item ${isPaid ? 'paid' : ''}`}>
             <span>
-              {debt.debtor.username} duguje <strong>{debt.amount} RSD</strong>
+              {debt.debtor.username} duguje <strong>{convertCurrency(debt.amount)} {currency}</strong>
             </span>
             {debt.status === 'unpaid' ? (
               <button
@@ -112,7 +130,7 @@ const GroupExpenses = () => {
         return (
           <div key={debt.debtor.id} className={`debt-item ${isPaid ? 'paid' : ''}`}>
             <span>
-              {debt.debtor.username} duguje <strong>{debt.amount} RSD</strong>
+              {debt.debtor.username} duguje <strong>{convertCurrency(debt.amount)} {currency}</strong>
             </span>
           </div>
         );
@@ -178,6 +196,15 @@ const GroupExpenses = () => {
           </button>
         </div>
 
+
+
+
+      
+         
+       
+
+
+
         <div className="filters">
           <label>
             Filtriraj po svrsi:
@@ -219,6 +246,20 @@ const GroupExpenses = () => {
           <option value="debts">Moja dugovanja</option>
         </select>
       </label>
+
+
+      <label>
+            Odaberi valutu:
+            <select
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value)}
+            >
+              <option value="RSD">RSD</option>
+              <option value="EUR">EUR</option>
+              <option value="USD">USD</option>
+              <option value="CHF">CHF</option>
+            </select>
+          </label>
         </div>
 
         <div className="expenses-list">
@@ -234,7 +275,7 @@ const GroupExpenses = () => {
                     <strong>{expense.payer.username}</strong> platio/la
                   </p>
                 </div>
-                <p className="expense-amount">Ukupno: {expense.amount} RSD</p>
+                <p className="expense-amount">Ukupno: {convertCurrency(expense.amount)} {currency}</p>
                 <div className="expense-debts">
                   <h4>Dugovanja:</h4>
                   {renderDebts(expense)}

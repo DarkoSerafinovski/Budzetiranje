@@ -306,7 +306,7 @@ body {
 /* Stil za expense card */
 .expense-card {
   background: #fff;
-  padding: 20px;
+  padding: 40px;
   margin-bottom: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -314,8 +314,8 @@ body {
 
 .expense-header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;  /* Postavljanje elemenata jedan ispod drugog */
+  gap: 10px; /* Razmak između elemenata */
 }
 
 .expense-header h3 {
