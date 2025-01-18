@@ -3,7 +3,7 @@ import "./Navigation.css";
 
 const Navigation = () => {
   // Postavljanje trenutne uloge
-  const [role, setRole] = useState("vip"); // Default uloga
+  const [role, setRole] = useState("regular"); // Default uloga
 
   useEffect(() => {
     // Provera uloge iz sessionStorage
