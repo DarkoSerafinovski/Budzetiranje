@@ -19,6 +19,7 @@ class UserResource extends JsonResource
             'username' => $this->username,
             'email' => $this->email,
             'role'=>$this->role,
+            'slika'=>asset($this->slika),
             'personal_expenses'=> PersonalExpenseResource::collection($this->personalExpenses)  ,
              ];
     }

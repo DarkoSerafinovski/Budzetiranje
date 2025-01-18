@@ -56,8 +56,8 @@ class PersonalExpenseController extends Controller
                 ], 401);
             }
            
-          $myExpenses = Auth::user()->personalExpenses;
-          return PersonalExpenseResource::collection($myExpenses);
+            $myExpenses = Auth::user()->personalExpenses()->orderBy('date', 'desc')->get();
+            return PersonalExpenseResource::collection($myExpenses);
           
         } catch (\Exception $e) {
          

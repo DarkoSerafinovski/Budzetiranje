@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Models\Group;
 use App\Http\Resources\GroupResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GroupController extends Controller
 {
@@ -14,8 +15,8 @@ class GroupController extends Controller
     {
        
        try {
-          
-           $groups = Group::paginate(5); 
+        $user = Auth::user();
+        $groups = $user->groups()->paginate(5);
            return GroupResource::collection($groups);
 
        } catch (Exception $e) {
@@ -32,7 +33,6 @@ class GroupController extends Controller
 {
     $validated = $request->validate([
         'name' => 'required|string|max:255|unique:groups,name',
-        'description' => 'nullable|string',
         'users' => 'required|array',
         'users.*' => 'exists:users,id',
     ]);
@@ -41,7 +41,6 @@ class GroupController extends Controller
        
         $group = Group::create([
             'name' => $validated['name'],
-            'description' => $validated['description'],
         ]);
 
         
@@ -68,6 +67,12 @@ public function show($id){
 try{
 
     $group = Group::findOrFail($id);
+    if (!$group->users->contains(Auth::user())) {
+        return response()->json([
+            'error'=> 'Nemate dozvolu za pregled ove grupe'
+        ],403);
+    }
+    $group->expenses = $group->expenses->sortByDesc('date'); // Sortira u opadajućem redosledu
     return new GroupResource($group);
 
 }catch (\Exception $e) {

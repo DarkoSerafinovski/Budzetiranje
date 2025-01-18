@@ -1,16 +1,56 @@
 import React, { useState } from "react";
 import "./Register.css";
-
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';  
 const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [slika, setSlika] = useState(null);
+  const navigate = useNavigate();  
 
-  const handleSubmit = (event) => {
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setSlika(file); 
+    }
+  };
+
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Dodajte logiku za validaciju i slanje podataka
-    console.log("Registracija uspešna");
+
+  
+    const formData = new FormData();
+    formData.append('username', username);
+    formData.append('email', email);
+    formData.append('password',password);
+    formData.append('role','regular');
+    formData.append('slika',slika);
+
+     
+
+    try {
+  
+      const response = await axios.post('http://localhost:8000/api/register', formData, {
+        headers: {
+          'Authorization': "Bearer " + sessionStorage.getItem("auth_token"),
+          'Content-Type': 'multipart/form-data', 
+        },
+      });
+
+      alert('Uspesna registracija');
+     
+      setUsername('');
+      setEmail('');
+      setPassword('');
+      setSlika(null);
+      navigate('/');
+    } catch (error) {
+      console.error('Greška prilikom slanja podataka:', error);
+    }
   };
 
   return (
@@ -65,6 +105,18 @@ const Register = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
             />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="slika">Slika profila</label>
+            <input
+              type="file"
+              id="slika"
+              accept="image/*"
+              onChange={handleImageChange}
+              required
+            />
+        
           </div>
           <button type="submit" className="register-button">
             Registrujte se

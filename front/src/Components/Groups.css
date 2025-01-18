@@ -3,8 +3,10 @@
     flex-wrap: wrap;
     gap: 20px;
     padding: 50px;
+
   }
-  
+
+
   .group-card {
     background-color: #f0f0f0; /* Svetla boja za karticu */
     border: 1px solid #ddd;
@@ -30,3 +32,48 @@
     margin: 5px 0;
   }
   
+
+.no-groups{
+  color: white;
+}
+
+
+  
+/* Paginacija */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color:white;
+  margin-top: 20px;
+}
+
+.pagination button {
+  margin: 0 5px;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  color: #333;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination button:hover {
+  background-color: #2929c2;
+  color: white;
+}
+
+.pagination button.active {
+  background-color: #2929c2;
+  color: white;
+  cursor: default;
+  border-color: #2929c2;
+}
+
+.pagination button.disabled {
+  background-color: #f1f1f1;
+  color: #aaa;
+  cursor: not-allowed;
+  border-color: #ddd;
+}

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
  
 class AuthController extends Controller
 {
@@ -17,7 +18,8 @@ class AuthController extends Controller
             'username' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
-            'role' => 'required|string|in:vip,regular'
+            'role' => 'required|string|in:vip,regular',
+            'slika' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',  
         ]);
  
         if($validator->fails()){
@@ -29,7 +31,9 @@ class AuthController extends Controller
             'username'=> $request->username,
             'email'=> $request->email,
             'password'=> Hash::make($request->password),
-            'role'=>$request->role
+            'role'=>$request->role,
+            'slika'=>$this->upload($request->file('slika'), $request->username),
+
         ]);
  
         $token = $user->createToken('auth_token')->plainTextToken;
@@ -57,5 +61,28 @@ class AuthController extends Controller
     {
        $request->user()->tokens()->delete();
        return response()->json(['message'=> 'Successfully logged out!']);
+    }
+
+
+
+    public function upload($file, $naziv)
+    {
+        
+    $sanitizedNaziv = preg_replace('/[^a-zA-Z0-9_-]/', '_', $naziv);
+    $extension = $file->getClientOriginalExtension();
+    $filename = $sanitizedNaziv . '.' . $extension;
+
+   
+    $path = 'app/' . $sanitizedNaziv;
+
+    
+    if (!Storage::exists($path)) {
+        Storage::makeDirectory($path);
+    }
+
+    $pathFile = $file->storeAs($path, $filename,'public');
+
+    
+    return Storage::url($pathFile);
     }
 }

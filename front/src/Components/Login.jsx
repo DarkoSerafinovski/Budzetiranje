@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Login.css';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
@@ -10,14 +11,32 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // Logika za autentifikaciju korisnika (može se dodati kasnije)
-    if (email === 'admin@example.com' && password === 'admin123') {
-      navigate('/statistika'); // Preusmeravanje na stranicu statistike za admina
-    } else if (email && password) {
-      navigate('/profile'); // Preusmeravanje na profil korisnika
-    } else {
-      setError('Molimo vas da unesete validne podatke.');
-    }
+    const userData = { email, password };
+
+    axios
+      .post('http://localhost:8000/api/login', userData)
+      .then((response) => {
+        if (response.data.success) {
+          sessionStorage.setItem('auth_token', response.data.access_token);
+          sessionStorage.setItem('role', response.data.role);
+          sessionStorage.setItem('user_id', response.data.data.id);
+
+          if(response.data.role==='admin'){
+            navigate('/statistika');
+          }
+          else{
+            navigate('/profile');
+          }
+          
+        } else {
+          setError('Neispravan email ili šifra.');
+        }
+      })
+      .catch((err) => {
+        console.error('Greška pri prijavi:', err);
+        setError('Došlo je do greške. Molimo pokušajte ponovo.');
+      });
+   
   };
 
   const goToRegister = () => {

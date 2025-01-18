@@ -29,6 +29,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanc
 
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/profile',[UserController::class,'myProfile']);
     Route::get('/groups',[GroupController::class,'index']);
     Route::get('/groups/{id}',[GroupController::class,'show']);
     Route::post('/groups',[GroupController::class,'store']);
@@ -38,5 +39,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('users/my-groups',[UserController::class,'myGroups']);
     Route::get('admin/stats',[UserController::class,'stats']);
     Route::put("groups/group-expenses/{id}/pay",[DebtClaimController::class,'paidDebt']);
-
+    Route::get('users',[UserController::class,'index']);
+    Route::get('users/edit',[UserController::class,'allWithoutAdmin']);
+    Route::put('users/change-role',[UserController::class,'changeUserRole']);
 });
